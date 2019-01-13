@@ -1,0 +1,59 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="form-group">
+        <a id="loc" href="" target="_blank"><button class="btn btn-lg btn-primary btn-block" style="background-color: #2196f3; border-color: white; text-underline-position: none">Search for <i class="fas fa-hospital"></i> hospital nearby</button></a>
+    </div>
+    <div>
+        <h1 style="text-align: center;">Report new accident</h1>
+        <div class="container" style="width: 30%; margin: 25px auto;">
+
+            <form action="/accidents" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="campground[name]" placeholder="name of victim" >
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="string" name="campground[place]" placeholder="place of accident">
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="campground[description]" placeholder="reason">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!!</button>
+                </div>
+            </form>
+            <a href="/accidents"><i class="fas fa-chevron-left"></i> Go Back</a>
+        </div>
+
+    </div>
+</div>
+<script>
+    var loc = document.getElementById("loc");
+    // var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        // else { 
+        //   x.innerHTML = "Geolocation is not supported by this browser.";
+        // }
+    }
+    getLocation();
+
+    function showPosition(position) {
+        var url = "https://www.google.com/maps/search/hospital/@" + position.coords.latitude + "," + position.coords.longitude;
+        loc.setAttribute("href", url);
+        // x.innerHTML = "Latitude: " + position.coords.latitude + 
+        // "<br>Longitude: " + position.coords.longitude;
+    }
+</script>
+
+<% include ../partials/footer %>
+
+
+
+<!-- https://www.google.com/maps?q=28.5434217,77.19305949999999 -->
